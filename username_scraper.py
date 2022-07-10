@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 driver_path = "C:\Program Files (x86)\chromedriver"
-usernames_url = "https://www.beerxchange.com/users?p=234"
+usernames_url = "https://www.beerxchange.com/users?p=366"
 
 driver = webdriver.Chrome(driver_path)
 
@@ -18,7 +18,7 @@ remainder = total_users % 10
 max_range = 12 # 10 users per page, divs range from 2 to 11
 
 usernames = []
-count = 234
+count = 366
 while count <= n_iters:
     if count == n_iters:
         max_range = remainder + 1

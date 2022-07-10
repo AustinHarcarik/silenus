@@ -1,76 +1,51 @@
-user,beer,brewery,kind,rating,abv,ibu
-austinharcarik,Water Ski Fight,Modern Times Beer,IPA - American,THEIR RATING (4.5),6% ABV,40 IBU
-austinharcarik,Dungeon Map,Modern Times Beer,IPA - American,THEIR RATING (3.5),7.2% ABV,60 IBU
-austinharcarik,Tank Tops & Tan Lines,Tarantula Hill Brewing Co,IPA - American,THEIR RATING (3.75),5.5% ABV,No IBU
-austinharcarik,Just Outstanding IPA,Kern River Brewing Company,IPA - American,THEIR RATING (4.25),6.8% ABV,65 IBU
-austinharcarik,Secret Catapult,Belching Beaver Brewery,IPA - New England / Hazy,THEIR RATING (4),6.5% ABV,45 IBU
-austinharcarik,Overcast Cloud Wish,Belching Beaver Brewery,IPA - New England / Hazy,THEIR RATING (3.5),6.5% ABV,No IBU
-austinharcarik,Chief Peak IPA,Topa Topa Brewing Co.,IPA - American,THEIR RATING (4.5),7% ABV,75 IBU
-austinharcarik,"West Coast IPA (-2013, 2019-)",Green Flash Brewing Company,IPA - American,THEIR RATING (4),7% ABV,95 IBU
-austinharcarik,StereoHopic IPA Vol. 4 (Lotus & Sabro),Lagunitas Brewing Company,IPA - American,THEIR RATING (4),7.2% ABV,65 IBU
-austinharcarik,Mind Haze,Firestone Walker Brewing Company,IPA - New England / Hazy,THEIR RATING (3.25),6.2% ABV,40 IBU
-austinharcarik,Racing Fuel,Garage Brewing Co,IPA - New England / Hazy,THEIR RATING (3.5),6.5% ABV,No IBU
-austinharcarik,Nirvana IPA,Brewery Ommegang,IPA - American,THEIR RATING (4.5),6.5% ABV,60 IBU
-austinharcarik,Boo Koo,Mother Earth Brewing Company,IPA - American,THEIR RATING (3.5),6.5% ABV,58 IBU
-austinharcarik,Velvet Glow,Russian River Brewing Company,Lager - Helles,THEIR RATING (3.75),4.75% ABV,20 IBU
-austinharcarik,Dank Dust,Elysian Brewing Company,IPA - American,THEIR RATING (1.75),8.2% ABV,62 IBU
-austinharcarik,Golden Monkey,Victory Brewing Company,Belgian Tripel,THEIR RATING (3.75),9.5% ABV,25 IBU
-austinharcarik,2XIPA,Southern Tier Brewing Company,IPA - Imperial / Double,THEIR RATING (4.25),8.2% ABV,80 IBU
-austinharcarik,Broken Skull IPA,El Segundo Brewing Company,IPA - American,THEIR RATING (3),6.7% ABV,67 IBU
-austinharcarik,Quasimodo West Coast IPA,Pizza Port Brewing Company,IPA - American,THEIR RATING (3.25),7% ABV,No IBU
-austinharcarik,Denogginizer,Drake's Brewing Company,IPA - Imperial / Double,THEIR RATING (4.25),9.75% ABV,91 IBU
-austinharcarik,IPA,Smog City Brewing Co.,IPA - American,THEIR RATING (4),7.3% ABV,No IBU
-austinharcarik,The Waldos' Special Ale,Lagunitas Brewing Company,IPA - Triple,THEIR RATING (3.75),11.7% ABV,100 IBU
-austinharcarik,"Paradisio (Dragon Fruit, Passion Fruit, Coconut)",Great Notion Brewing,Sour - Fruited,THEIR RATING (0.25),7.5% ABV,No IBU
-austinharcarik,2021 Lotus Flower Ipa,Pariah Brewing Company,IPA - New England / Hazy,THEIR RATING (4.25),6.8% ABV,43 IBU
-austinharcarik,Picnic Lightning,Brouwerij West,IPA - American,THEIR RATING (4.5),6.8% ABV,No IBU
-mathfreak1110,Hazer Tag,Odell Brewing Co.,IPA - New England / Hazy,THEIR RATING (4.25),7% ABV,38 IBU
-mathfreak1110,Stone Tangerine Express Hazy IPA,Stone Brewing,IPA - American,THEIR RATING (4),6.7% ABV,75 IBU
-mathfreak1110,Warped Speed,Lake Louie Brewing,Scotch Ale / Wee Heavy,THEIR RATING (3.75),6.9% ABV,24 IBU
-mathfreak1110,M-43 N.E. India Pale Ale,Old Nation Brewing Co.,IPA - New England / Hazy,THEIR RATING (4.25),6.8% ABV,65 IBU
-mathfreak1110,Myrcenary Double IPA,Odell Brewing Co.,IPA - Imperial / Double,THEIR RATING (4.25),9.3% ABV,70 IBU
-mathfreak1110,Mexican Honey Noir,Indeed Brewing Company,Lager - Dark,THEIR RATING (3.25),6.2% ABV,30 IBU
-mathfreak1110,Mr. Plow,Very Nice Brewing Company,IPA - Imperial / Double,THEIR RATING (4.25),8% ABV,117 IBU
-mathfreak1110,Fuggly & Brown Ale,Very Nice Brewing Company,Brown Ale - American,THEIR RATING (3.5),5.9% ABV,23 IBU
-mathfreak1110,Game of Thrones: My Watch Has Ended,Brewery Ommegang,Brown Ale - Imperial / Double,THEIR RATING (3.5),8% ABV,27 IBU
-mathfreak1110,The Godfather,Eagle Park Brewing Company,IPA - New England / Hazy,THEIR RATING (3.5),7% ABV,No IBU
-mathfreak1110,Corona Extra,Grupo Modelo,Lager - Mexican,THEIR RATING (2.5),4.5% ABV,18 IBU
-mathfreak1110,Corona Familiar,Grupo Modelo,Lager - American,THEIR RATING (3.25),4.8% ABV,No IBU
-mathfreak1110,Atomic Torpedo,Sierra Nevada Brewing Co.,IPA - Imperial / Double,THEIR RATING (4),8.2% ABV,50 IBU
-mathfreak1110,Whammy,Slice Beer Company,Red Ale - Imperial / Double,THEIR RATING (4),9% ABV,No IBU
-mathfreak1110,Foggy Concepts,Flatland Brewing Company,IPA - New England / Hazy,THEIR RATING (4.25),6.6% ABV,30 IBU
-mathfreak1110,Superior Pale Ale,Earth Rider Brewery,Pale Ale - American,THEIR RATING (3.5),5.5% ABV,56 IBU
-mathfreak1110,Mango Double Marbles,More Brewing Company,IPA - Imperial / Double Milkshake,THEIR RATING (4),8% ABV,No IBU
-mathfreak1110,Raspbecrush,Earth Rider Brewery,Sour - Fruited,THEIR RATING (3.75),5.2% ABV,15 IBU
-mathfreak1110,Stanford's IPA,Foxtown Brewing,IPA - American,THEIR RATING (3.5),7.5% ABV,64 IBU
-mathfreak1110,Reserve Series Strong Ale Aged In Bourbon Barrels,Foxtown Brewing,Strong Ale - American,THEIR RATING (3.75),10.5% ABV,No IBU
-mathfreak1110,Oh'Fer,Broken Bat Brewing Co,IPA - American,THEIR RATING (3.75),6.7% ABV,No IBU
-mathfreak1110,Juice'd,Broken Bat Brewing Co,IPA - Imperial / Double,THEIR RATING (3.5),10.1% ABV,No IBU
-mathfreak1110,Junior,Broken Bat Brewing Co,Stout - Other,THEIR RATING (3.5),8.1% ABV,No IBU
-mathfreak1110,Hamilton's Party Oatmeal Stout,Foxtown Brewing,Stout - Oatmeal,THEIR RATING (3.5),6% ABV,25 IBU
-mathfreak1110,Bourbon Barrel Aged Highland Charge (2021),Heathen Brewing,Scotch Ale / Wee Heavy,THEIR RATING (4),11% ABV,20 IBU
-dturkenk,World Gone Hazy,The Bronx Brewery,IPA - New England / Hazy,THEIR RATING (3.5),7% ABV,35 IBU
-dturkenk,Le Seul XVII (Pineapple and Watermelon),Une Année Brewery,Sour - Fruited,THEIR RATING (4.25),6.5% ABV,1 IBU
-dturkenk,Brass Bones,Paradox Brewery (New York),Bock - Hell / Maibock / Lentebock,THEIR RATING (4),6.5% ABV,No IBU
-dturkenk,Black Ash,The Drowned Lands Brewery,Porter - American,THEIR RATING (4.25),5.5% ABV,No IBU
-dturkenk,Samuel Adams Beach Session IPA,Samuel Adams,IPA - Session,THEIR RATING (3.25),4.7% ABV,30 IBU
-dturkenk,Milieu,The Drowned Lands Brewery,Belgian Tripel,THEIR RATING (4),9% ABV,No IBU
-dturkenk,Iced Mocha Stout,Hubbard's Cave,Stout - Pastry,THEIR RATING (3.25),6% ABV,No IBU
-dturkenk,Rare Earth,The Drowned Lands Brewery,Pilsner - Other,THEIR RATING (4),4.8% ABV,No IBU
-dturkenk,Winnow,The Drowned Lands Brewery,Festbier,THEIR RATING (4.25),5.2% ABV,No IBU
-dturkenk,Cherry Quad,Une Année Brewery,Belgian Quadrupel,THEIR RATING (3.75),11% ABV,No IBU
-dturkenk,Pêche,Une Année Brewery,Wild Ale - American,THEIR RATING (4.25),6.5% ABV,1 IBU
-dturkenk,Sunrise Bay,B. Nektar Meadery,Mead - Other,THEIR RATING (4),4% ABV,No IBU
-dturkenk,MC²,Equilibrium Brewery,IPA - Imperial / Double,THEIR RATING (4.25),8% ABV,65 IBU
-dturkenk,Skully Barrel No. 58 Arno Pommer,Paradox Beer Company (Colorado),Wild Ale - American,THEIR RATING (3.75),7.9% ABV,No IBU
-dturkenk,Winter Warmer,Blue Point Brewing Company,Winter Warmer,THEIR RATING (3.75),6.4% ABV,No IBU
-dturkenk,Light & Smoke Discipline,Whitman Brewing Company,Smoked Beer,THEIR RATING (3.25),4.8% ABV,No IBU
-dturkenk,"I'm So, I'm So... Blanc",Whitman Brewing Company,Pale Ale - American,THEIR RATING (3.75),4.7% ABV,No IBU
-dturkenk,Bourbon County Brand Caramella Wheatwine (2020),Goose Island Beer Co.,Wheat Beer - Wheat Wine,THEIR RATING (4.25),14.6% ABV,60 IBU
-dturkenk,Nocturna,Allagash Brewing Company,Stout - Imperial / Double,THEIR RATING (4),9.5% ABV,No IBU
-dturkenk,Tripel,Allagash Brewing Company,Belgian Tripel,THEIR RATING (3.5),9% ABV,18 IBU
-dturkenk,Black Cat Porter,Zero Gravity Craft Brewery,Porter - Other,THEIR RATING (3.25),5.4% ABV,40 IBU
-dturkenk,Sweet Baby Java,DuClaw Brewing Company,Porter - Coffee,THEIR RATING (4),6.2% ABV,53 IBU
-dturkenk,KBS Cinnamon Vanilla Cocoa,Founders Brewing Co.,Stout - Imperial / Double Coffee,THEIR RATING (4.5),12% ABV,45 IBU
-dturkenk,Barrel & Bean,Allagash Brewing Company,Belgian Tripel,THEIR RATING (4),9.6% ABV,18 IBU
-dturkenk,Panther Cub (2021),Founders Brewing Co.,Porter - Imperial / Double,THEIR RATING (4.5),9.2% ABV,30 IBU
+user,beer,brewery,style,user_rating,global_rating,abv,ibu,check_in_ts
+austinharcarik,Water Ski Fight,Modern Times Beer,IPA - American,4.5,N/A,6% ABV,40 IBU,2022-07-08 19:58:30
+austinharcarik,Dungeon Map,Modern Times Beer,IPA - American,3.5,3.83,7.2% ABV,60 IBU,2022-06-28 20:22:33
+austinharcarik,Tank Tops & Tan Lines,Tarantula Hill Brewing Co,IPA - American,3.75,3.71,5.5% ABV,No IBU,2022-06-28 20:16:25
+austinharcarik,Just Outstanding IPA,Kern River Brewing Company,IPA - American,4.25,3.95,6.8% ABV,65 IBU,2022-06-28 19:32:07
+austinharcarik,Secret Catapult,Belching Beaver Brewery,IPA - New England / Hazy,4.0,3.87,6.5% ABV,45 IBU,2022-06-23 18:42:20
+austinharcarik,Overcast Cloud Wish,Belching Beaver Brewery,IPA - New England / Hazy,3.5,3.76,6.5% ABV,No IBU,2022-06-23 18:41:42
+austinharcarik,Chief Peak IPA,Topa Topa Brewing Co.,IPA - American,4.5,3.81,7% ABV,75 IBU,2022-06-21 19:25:33
+austinharcarik,"West Coast IPA (-2013, 2019-)",Green Flash Brewing Company,IPA - American,4.0,3.84,7% ABV,95 IBU,2022-06-14 18:30:34
+austinharcarik,StereoHopic IPA Vol. 4 (Lotus & Sabro),Lagunitas Brewing Company,IPA - American,4.0,3.78,7.2% ABV,65 IBU,2022-05-30 15:56:59
+austinharcarik,Mind Haze,Firestone Walker Brewing Company,IPA - New England / Hazy,3.25,3.77,6.2% ABV,40 IBU,2022-05-23 18:39:31
+austinharcarik,Racing Fuel,Garage Brewing Co,IPA - New England / Hazy,3.5,3.54,6.5% ABV,No IBU,2022-05-21 11:19:05
+austinharcarik,Nirvana IPA,Brewery Ommegang,IPA - American,4.5,3.73,6.5% ABV,60 IBU,2022-05-20 17:20:36
+austinharcarik,Boo Koo,Mother Earth Brewing Company,IPA - American,3.5,3.78,6.5% ABV,58 IBU,2022-05-07 14:07:47
+austinharcarik,Velvet Glow,Russian River Brewing Company,Lager - Helles,3.75,3.79,4.75% ABV,20 IBU,2022-05-03 22:08:34
+austinharcarik,Dank Dust,Elysian Brewing Company,IPA - American,1.75,3.65,8.2% ABV,62 IBU,2022-04-28 18:55:48
+austinharcarik,Golden Monkey,Victory Brewing Company,Belgian Tripel,3.75,3.75,9.5% ABV,25 IBU,2022-04-28 18:19:57
+austinharcarik,2XIPA,Southern Tier Brewing Company,IPA - Imperial / Double,4.25,3.79,8.2% ABV,80 IBU,2022-04-24 19:57:43
+austinharcarik,Broken Skull IPA,El Segundo Brewing Company,IPA - American,3.0,3.8,6.7% ABV,67 IBU,2022-04-10 20:52:30
+austinharcarik,Quasimodo West Coast IPA,Pizza Port Brewing Company,IPA - American,3.25,3.82,7% ABV,No IBU,2022-04-10 19:34:17
+austinharcarik,Denogginizer,Drake's Brewing Company,IPA - Imperial / Double,4.25,3.91,9.75% ABV,91 IBU,2022-04-09 20:49:59
+austinharcarik,IPA,Smog City Brewing Co.,IPA - American,4.0,3.75,7.3% ABV,No IBU,2022-04-03 21:23:14
+austinharcarik,The Waldos' Special Ale,Lagunitas Brewing Company,IPA - Triple,3.75,4.05,11.7% ABV,100 IBU,2022-04-02 20:16:58
+austinharcarik,"Paradisio (Dragon Fruit, Passion Fruit, Coconut)",Great Notion Brewing,Sour - Fruited,0.25,4.19,7.5% ABV,No IBU,2022-04-02 18:37:54
+austinharcarik,2021 Lotus Flower Ipa,Pariah Brewing Company,IPA - New England / Hazy,4.25,3.91,6.8% ABV,43 IBU,2022-04-01 22:22:03
+austinharcarik,Picnic Lightning,Brouwerij West,IPA - American,4.5,4.02,6.8% ABV,No IBU,2022-03-28 19:46:04
+mathfreak1110,Hazer Tag,Odell Brewing Co.,IPA - New England / Hazy,4.25,3.86,7% ABV,38 IBU,2022-07-09 20:44:41
+mathfreak1110,Stone Tangerine Express Hazy IPA,Stone Brewing,IPA - American,4.0,3.69,6.7% ABV,75 IBU,2022-07-04 21:21:43
+mathfreak1110,Warped Speed,Lake Louie Brewing,Scotch Ale / Wee Heavy,3.75,3.75,6.9% ABV,24 IBU,2022-07-01 21:52:45
+mathfreak1110,M-43 N.E. India Pale Ale,Old Nation Brewing Co.,IPA - New England / Hazy,4.25,4.18,6.8% ABV,65 IBU,2022-06-18 21:47:06
+mathfreak1110,Myrcenary Double IPA,Odell Brewing Co.,IPA - Imperial / Double,4.25,4.02,9.3% ABV,70 IBU,2022-06-18 19:56:35
+mathfreak1110,Mexican Honey Noir,Indeed Brewing Company,Lager - Dark,3.25,3.77,6.2% ABV,30 IBU,2022-06-15 20:45:18
+mathfreak1110,Mr. Plow,Very Nice Brewing Company,IPA - Imperial / Double,4.25,3.93,8% ABV,117 IBU,2022-06-11 20:30:52
+mathfreak1110,Fuggly & Brown Ale,Very Nice Brewing Company,Brown Ale - American,3.5,3.53,5.9% ABV,23 IBU,2022-06-11 20:28:21
+mathfreak1110,Game of Thrones: My Watch Has Ended,Brewery Ommegang,Brown Ale - Imperial / Double,3.5,3.78,8% ABV,27 IBU,2022-06-11 00:34:34
+mathfreak1110,The Godfather,Eagle Park Brewing Company,IPA - New England / Hazy,3.5,4.04,7% ABV,No IBU,2022-06-04 20:57:35
+mathfreak1110,Corona Extra,Grupo Modelo,Lager - Mexican,2.5,3.11,4.5% ABV,18 IBU,2022-05-28 23:13:58
+mathfreak1110,Corona Familiar,Grupo Modelo,Lager - American,3.25,3.28,4.8% ABV,No IBU,2022-05-28 23:11:33
+mathfreak1110,Atomic Torpedo,Sierra Nevada Brewing Co.,IPA - Imperial / Double,4.0,3.91,8.2% ABV,50 IBU,2022-05-26 21:31:44
+mathfreak1110,Whammy,Slice Beer Company,Red Ale - Imperial / Double,4.0,3.98,9% ABV,No IBU,2022-05-25 21:20:41
+mathfreak1110,Foggy Concepts,Flatland Brewing Company,IPA - New England / Hazy,4.25,3.81,6.6% ABV,30 IBU,2022-05-25 18:40:00
+mathfreak1110,Superior Pale Ale,Earth Rider Brewery,Pale Ale - American,3.5,3.71,5.5% ABV,56 IBU,2022-05-21 23:33:25
+mathfreak1110,Mango Double Marbles,More Brewing Company,IPA - Imperial / Double Milkshake,4.0,4.06,8% ABV,No IBU,2022-05-21 21:41:20
+mathfreak1110,Raspbecrush,Earth Rider Brewery,Sour - Fruited,3.75,3.81,5.2% ABV,15 IBU,2022-05-21 19:34:50
+mathfreak1110,Stanford's IPA,Foxtown Brewing,IPA - American,3.5,3.8,7.5% ABV,64 IBU,2022-05-21 19:33:56
+mathfreak1110,Reserve Series Strong Ale Aged In Bourbon Barrels,Foxtown Brewing,Strong Ale - American,3.75,4.2,10.5% ABV,No IBU,2022-05-21 00:32:17
+mathfreak1110,Oh'Fer,Broken Bat Brewing Co,IPA - American,3.75,3.47,6.7% ABV,No IBU,2022-05-19 16:57:32
+mathfreak1110,Juice'd,Broken Bat Brewing Co,IPA - Imperial / Double,3.5,3.72,10.1% ABV,No IBU,2022-05-19 16:56:04
+mathfreak1110,Junior,Broken Bat Brewing Co,Stout - Other,3.5,3.96,8.1% ABV,No IBU,2022-05-19 14:43:10
+mathfreak1110,Hamilton's Party Oatmeal Stout,Foxtown Brewing,Stout - Oatmeal,3.5,3.55,6% ABV,25 IBU,2022-05-18 21:43:39
+mathfreak1110,Bourbon Barrel Aged Highland Charge (2021),Heathen Brewing,Scotch Ale / Wee Heavy,4.0,4.14,11% ABV,20 IBU,2022-05-11 22:14:39
