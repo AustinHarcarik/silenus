@@ -1,4 +1,5 @@
 import math
+import time
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -20,14 +21,14 @@ usernames = []
 count = 1
 while count <= n_iters:
     if count == n_iters:
-        max_range = remainder
+        max_range = remainder + 1
     for user in range(2, max_range):
         username = driver.find_element(By.XPATH, f'/html/body/div[2]/section/div/div/div[{user}]/div/div[1]/div/div/h4/a').text
         usernames.append(username)
+    time.sleep(3)
     driver.find_element(By.XPATH, "/html/body/div[2]/section/div/div/div[12]/ul/li[3]/a").click()
     count += 1
-
-output = pd.DataFrame(usernames, columns = "username")
-output.to_csv('usernames.csv')
+    output = pd.DataFrame(usernames, columns = ["username"])
+    output.to_csv('usernames.csv')
 
 driver.quit()
