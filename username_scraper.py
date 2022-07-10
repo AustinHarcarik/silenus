@@ -1,35 +1,15 @@
-import math
-import time
 import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.common.by import By
+import bs4 as bs
+import urllib.request
+import ssl
+import re
 
-driver_path = "C:\Program Files (x86)\chromedriver"
-usernames_url = "https://www.beerxchange.com/users?p=366"
+ssl._create_default_https_context = ssl._create_unverified_context
 
-driver = webdriver.Chrome(driver_path)
+url = url = f'https://beerxchange.com/users'
+source = urllib.request.urlopen(url)
+soup = bs.BeautifulSoup(source,'lxml')
 
-driver.get(usernames_url)
-
-total_users = driver.find_element(By.ID, "homeTitle").text
+total_users = soup.find(id = "homeTitle").text
 total_users = int(''.join(c for c in total_users if c.isdigit()))
-n_iters = math.ceil(total_users / 10)
-remainder = total_users % 10
-max_range = 12 # 10 users per page, divs range from 2 to 11
-
-usernames = []
-count = 366
-while count <= n_iters:
-    if count == n_iters:
-        max_range = remainder + 1
-    for user in range(2, max_range):
-        username = driver.find_element(By.XPATH, f'/html/body/div[2]/section/div/div/div[{user}]/div/div[1]/div/div/h4/a').text
-        usernames.append(username)
-    time.sleep(1)
-    driver.find_element(By.XPATH, "/html/body/div[2]/section/div/div/div[12]/ul/li[3]/a").click()
-    count += 1
-    output = pd.DataFrame(usernames, columns = ["username"])
-    output.to_csv('usernames.csv', index = False)
-
-driver.quit()
 
