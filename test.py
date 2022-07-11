@@ -1,4 +1,4 @@
 import pandas as pd
 
-foo = pd.read_csv('usernamesp1-p10.csv')
-print(foo)
+foo = pd.read_csv('usernames/usernamesp1-p25.csv')
+print(foo['user'][0])

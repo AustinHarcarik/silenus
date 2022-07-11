@@ -24,7 +24,9 @@ def main(params):
         user_divs = soup.find_all("h4", {"class": "media-heading"})
         for i in range(len(user_divs)): 
             user = user_divs[i].text
-            user = re.sub('\s+',' ', user)
+            user = user.lstrip()
+            user = user.split(' ', 1)[0]
+            user = user.strip()
             usernames.append(user)
 
     for page in range(page_start, page_end + 1): 
@@ -34,7 +36,9 @@ def main(params):
         user_divs = soup.find_all("h4", {"class": "media-heading"})
         for i in range(len(user_divs)): 
             user = user_divs[i].text
-            user = re.sub('\s+',' ', user)
+            user = user.lstrip()
+            user = user.split(' ', 1)[0]
+            user = user.strip()
             usernames.append(user)
 
     output = pd.DataFrame(usernames, columns=['user'])
