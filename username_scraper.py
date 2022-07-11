@@ -1,14 +1,20 @@
 import pandas as pd
+import numpy as np
 import bs4 as bs
 import urllib.request
 import ssl
-import re
 import argparse
+from datetime import datetime
 
 def main(params):
-    page_start = params.page_start
-    page_end = params.page_end
-    include_first_page = params.include_first_page
+    n_users = params.n_users
+
+    hour = datetime.now().hour
+
+    page_ranges = np.linspace(1, n_users / 10, 25, dtype = int)
+    
+    page_start = page_ranges[hour]
+    page_end = page_ranges[hour + 1] - 1
 
     base_url = 'https://www.beerxchange.com/users'
 
@@ -18,7 +24,7 @@ def main(params):
 
     usernames = []
 
-    if include_first_page: 
+    if hour == 0: 
         source = urllib.request.urlopen(base_url)
         soup = bs.BeautifulSoup(source,'lxml')
         user_divs = soup.find_all("h4", {"class": "media-heading"})
@@ -47,9 +53,8 @@ def main(params):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'scrape untappd usernames from beerxchange.com')
 
-    parser.add_argument('--page_start', help = 'page to start on', default = 1, type = int)
-    parser.add_argument('--page_end', help = 'page to end on', default = 10, type = int)
-    parser.add_argument('--include_first_page', help = 'very first page has no number in url', default = False, type = bool)
+    parser.add_argument('--verbose', help = 'verbose output', default = True, type = bool)
+    parser.add_argument('--n_users', help = 'total number of users', default = 19568, type = int)
 
     args = parser.parse_args()
 

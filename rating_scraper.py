@@ -1,7 +1,22 @@
 import pandas as pd
+import numpy as np
 import bs4 as bs
 import urllib.request
 import re
+import sys
+from datetime import datetime
+import argparse
+
+def main(params):
+    verbose = params.verbose
+    n_users = params.n_users
+
+    hour = datetime.now().hour
+
+    page_ranges = np.linspace(1, n_users / 10, 25, dtype = int)
+    
+    page_min = page_ranges[hour]
+    page_max = page_ranges[hour + 1] - 1
 
 usernames = ['austinharcarik', 'mathfreak1110']
 
@@ -96,3 +111,13 @@ output_df = pd.DataFrame(output_list)
 # output_df = output_df.astype(output_schema)
 
 output_df.to_csv('ratings.csv', index = False)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description = 'scrape untappd ratings and beer info')
+
+    parser.add_argument('--verbose', help = 'verbose output', default = True, type = bool)
+    parser.add_argument('--n_users', help = 'total number of users', default = 19568, type = int)
+
+    args = parser.parse_args()
+
+    main(args)
