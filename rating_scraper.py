@@ -3,7 +3,7 @@ import bs4 as bs
 import urllib.request
 import re
 
-usernames = pd.read_csv('usernames.csv')['user']
+usernames = ['austinharcarik', 'mathfreak1110']
 
 month_map = {
     "Jan":"01", 
@@ -94,4 +94,5 @@ for username in usernames:
 
 output_df = pd.DataFrame(output_list)
 # output_df = output_df.astype(output_schema)
+
 output_df.to_csv('ratings.csv', index = False)

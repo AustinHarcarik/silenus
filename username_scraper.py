@@ -6,13 +6,13 @@ import re
 import argparse
 
 def main(params):
-    page_start = int(params.page_start)
-    page_end = int(params.page_end)
+    page_start = params.page_start
+    page_end = params.page_end
     include_first_page = params.include_first_page
 
     base_url = 'https://www.beerxchange.com/users'
 
-    file_name = f'usernamesp{page_start}-p{page_end}.csv'
+    file_name = f'usernames/usernamesp{page_start}-p{page_end}.csv'
 
     ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -43,9 +43,9 @@ def main(params):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'scrape untappd usernames from beerxchange.com')
 
-    parser.add_argument('--page_start', help = 'page to start on', default = 1)
-    parser.add_argument('--page_end', help = 'page to end on', default = 10)
-    parser.add_argument('--include_first_page', help = 'very first page has no number in url', default = False)
+    parser.add_argument('--page_start', help = 'page to start on', default = 1, type = int)
+    parser.add_argument('--page_end', help = 'page to end on', default = 10, type = int)
+    parser.add_argument('--include_first_page', help = 'very first page has no number in url', default = False, type = bool)
 
     args = parser.parse_args()
 
