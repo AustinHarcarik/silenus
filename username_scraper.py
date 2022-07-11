@@ -3,36 +3,50 @@ import bs4 as bs
 import urllib.request
 import ssl
 import re
-import math
+import argparse
 
-ssl._create_default_https_context = ssl._create_unverified_context
+def main(params):
+    page_start = params.page_start
+    page_end = params.page_end
+    include_first_page = params.include_first_page
 
-base_url = 'https://beerxchange.com/users'
-source = urllib.request.urlopen(base_url)
-soup = bs.BeautifulSoup(source,'lxml')
+    base_url = 'https://www.beerxchange.com/users'
 
-total_users = soup.find(id = "homeTitle").text
-total_users = float(''.join(c for c in total_users if c.isdigit()))
+    file_name = f'usernames/usernamesp{page_start}-p{page_end}.csv'
 
-n_iters = math.ceil(total_users / 10)
+    ssl._create_default_https_context = ssl._create_unverified_context
 
-usernames = []
+    usernames = []
 
-user_divs = soup.find_all("h4", {"class": "media-heading"})
-for i in range(len(user_divs)): 
-    user = user_divs[i].text
-    user = re.sub('\s+',' ', user)
-    usernames.append(user)
+    if include_first_page: 
+        source = urllib.request.urlopen(base_url)
+        soup = bs.BeautifulSoup(source,'lxml')
+        user_divs = soup.find_all("h4", {"class": "media-heading"})
+        for i in range(len(user_divs)): 
+            user = user_divs[i].text
+            user = re.sub('\s+',' ', user)
+            usernames.append(user)
 
-for iter in range(1, n_iters): 
-    url = base_url + f'?p={iter}'
-    source = urllib.request.urlopen(url)
-    soup = bs.BeautifulSoup(source,'lxml')
-    user_divs = soup.find_all("h4", {"class": "media-heading"})
-    for i in range(len(user_divs)): 
-        user = user_divs[i].text
-        user = re.sub('\s+',' ', user)
-        usernames.append(user)
+    for page in range(page_start, page_end + 1): 
+        url = base_url + f'?p={page}'
+        source = urllib.request.urlopen(url)
+        soup = bs.BeautifulSoup(source,'lxml')
+        user_divs = soup.find_all("h4", {"class": "media-heading"})
+        for i in range(len(user_divs)): 
+            user = user_divs[i].text
+            user = re.sub('\s+',' ', user)
+            usernames.append(user)
 
-output = pd.DataFrame(usernames, columns=['user'])
-output.to_csv('usernames.csv', index = False)
+    output = pd.DataFrame(usernames, columns=['user'])
+    output.to_csv(file_name, index = False)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description = 'scrape untappd usernames from beerxchange.com')
+
+    parser.add_argument('--page_start', help = 'page to start on', default = 1, type = int)
+    parser.add_argument('--page_end', help = 'page to end on', default = 10, type = int)
+    parser.add_argument('--include_first_page', help = 'very first page has no number in url', default = False, type = bool)
+
+    args = parser.parse_args()
+
+    main(args)

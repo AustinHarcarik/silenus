@@ -3,7 +3,7 @@ import bs4 as bs
 import urllib.request
 import re
 
-usernames = pd.read_csv('usernames.csv')['user']
+usernames = ['austinharcarik', 'mathfreak1110']
 
 month_map = {
     "Jan":"01", 
