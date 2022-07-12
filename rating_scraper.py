@@ -3,20 +3,11 @@ import numpy as np
 import bs4 as bs
 import urllib.request
 import re
-import sys
 from datetime import datetime
 import argparse
 
 def main(params):
     verbose = params.verbose
-    n_users = params.n_users
-
-    hour = datetime.now().hour
-
-    page_ranges = np.linspace(1, n_users / 10, 25, dtype = int)
-    
-    page_min = page_ranges[hour]
-    page_max = page_ranges[hour + 1] - 1
 
 usernames = ['austinharcarik', 'mathfreak1110']
 
@@ -34,17 +25,6 @@ month_map = {
     "Nov":"11", 
     "Dec":"12"
 }
-
-# output_schema = {
-#     "user":"|S50", 
-#     "beer":"|S100", 
-#     "brewery":"|S100", 
-#     "style":"|S100", 
-#     "user_rating":"float64", 
-#     "abv":"float64", 
-#     "ibu":"int64", 
-#     "check_in_ts":"datetime64[ns]"
-# }
 
 def scrape_beer(user, beer_div, detail_div):
     beer = beer_div.find("p", {"class":"name"}).text
