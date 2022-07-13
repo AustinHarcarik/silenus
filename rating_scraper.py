@@ -1,15 +1,12 @@
+from numpy import dtype
 import pandas as pd
-import numpy as np
 import bs4 as bs
 import urllib.request
 import re
-from datetime import datetime
 import argparse
-
-def main(params):
-    verbose = params.verbose
-
-usernames = ['austinharcarik', 'mathfreak1110']
+from sqlalchemy import create_engine
+from dotenv import load_dotenv, find_dotenv
+import os
 
 month_map = {
     "Jan":"01", 
@@ -31,7 +28,7 @@ def scrape_beer(user, beer_div, detail_div):
 
     brewery = beer_div.find("p", {"class":"brewery"}).text
 
-    style = beer_div.find("p", {"class":"style"}).text
+    beer_style = beer_div.find("p", {"class":"style"}).text
 
     ratings = beer_div.find_all("div", {"class":"you"})
     user_rating = ratings[0].text
@@ -58,7 +55,7 @@ def scrape_beer(user, beer_div, detail_div):
         "user":user,
         "beer":beer, 
         "brewery":brewery, 
-        "style":style, 
+        "style":beer_style, 
         "user_rating":user_rating, 
         "global_rating":global_rating, 
         "abv":abv, 
@@ -66,37 +63,78 @@ def scrape_beer(user, beer_div, detail_div):
         "check_in_ts":check_in_ts
     }
 
-    output_list.append(beer_dict)
+    return(beer_dict)
 
-output_list = []
+def main(params):
+    load_dotenv(find_dotenv())
 
-for username in usernames:
-    url = f'https://untappd.com/user/{username}/beers'
+    verbose = params.verbose
+    user_start = params.user_start
+    user_end = params.user_end
+    db = params.db
+    db_username = params.db_username
+    db_password = params.db_password
+    host = params.host
+    port = params.port
+    table = params.table
 
-    source = urllib.request.urlopen(url).read()
-    soup = bs.BeautifulSoup(source,'lxml')
+    if db == 'null':
+        db = os.environ.get('DB')
+    if db_username == 'null':
+        db_username = os.environ.get('DB_USERNAME')
+    if db_password == 'null':
+        db_password = os.environ.get('DB_PASSWORD')
+    if host == 'null': 
+        host = os.environ.get('HOST')
+    if port == 'null': 
+        port = os.environ.get('PORT')
+    if table == 'null':
+        table = os.environ.get('TABLE') 
 
-    beer_divs = soup.find_all("div", {"class": "beer-details"})
-    detail_divs = soup.find_all("div", {"class": "details"})
+    engine = create_engine(f'postgresql://{db_username}:{db_password}@{host}:{port}/{db}')
+    engine.connect()
 
-    n_check_ins = len(beer_divs)
+    username_query = f'select * from {table} limit 10'
+    usernames = pd.read_sql(username_query, con = engine)['username']
 
-    if n_check_ins == 0:
-        pass
+    output_list = []
 
-    for i in range(n_check_ins):
-        scrape_beer(username, beer_divs[i], detail_divs[i])
+    for username in usernames:
+        print(username)
+        url = f'https://untappd.com/user/{username}/beers'
 
-output_df = pd.DataFrame(output_list)
-# output_df = output_df.astype(output_schema)
+        source = urllib.request.urlopen(url).read()
+        soup = bs.BeautifulSoup(source,'lxml')
 
-output_df.to_csv('ratings.csv', index = False)
+        beer_divs = soup.find_all("div", {"class": "beer-details"})
+        detail_divs = soup.find_all("div", {"class": "details"})
+
+        n_check_ins = len(beer_divs)
+
+        if n_check_ins == 0:
+            pass
+
+        for i in range(n_check_ins):
+            scraped = scrape_beer(username, beer_divs[i], detail_divs[i])
+            output_list.append(scraped)
+
+    output_df = pd.DataFrame(output_list)
+    print(output_df.dtypes)
+
+    # output_df.to_csv('ratings.csv', index = False)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'scrape untappd ratings and beer info')
 
     parser.add_argument('--verbose', help = 'verbose output', default = True, type = bool)
-    parser.add_argument('--n_users', help = 'total number of users', default = 19568, type = int)
+    parser.add_argument('--user_start', help = 'username number to start at', default = 1, type = int)
+    parser.add_argument('--user_end', help = 'username number to end at', default = 100, type = int)
+    parser.add_argument('--db', help = 'postgres database name', default = 'null', type = str)
+    parser.add_argument('--db_username', help = 'postgres database username', default = 'null', type = str)
+    parser.add_argument('--db_password', help = 'postgres database password', default = 'null', type = str)
+    parser.add_argument('--host', help = 'postgres db hostname', default = 'null', type = str)
+    parser.add_argument('--port', help = 'postgres db port', default = 'null', type = str)
+    parser.add_argument('--table', help = 'postgres table name', default = 'null', type = str)
 
     args = parser.parse_args()
 
