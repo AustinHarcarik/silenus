@@ -1,4 +1,3 @@
-from numpy import dtype
 import pandas as pd
 import bs4 as bs
 import urllib.request
@@ -7,6 +6,7 @@ import argparse
 from sqlalchemy import create_engine
 from dotenv import load_dotenv, find_dotenv
 import os
+import time
 
 month_map = {
     "Jan":"01", 
@@ -23,6 +23,19 @@ month_map = {
     "Dec":"12"
 }
 
+data_types = {
+    "username":"str", 
+    "check_in_ts":"datetime64", 
+    "beer":"str", 
+    "brewery":"str", 
+    "beer_style":"str", 
+    "user_rating":"float", 
+    "global_rating":"float", 
+    "abv":"float", 
+    "ibu":"int"
+}
+
+
 def scrape_beer(user, beer_div, detail_div):
     beer = beer_div.find("p", {"class":"name"}).text
 
@@ -31,13 +44,26 @@ def scrape_beer(user, beer_div, detail_div):
     beer_style = beer_div.find("p", {"class":"style"}).text
 
     ratings = beer_div.find_all("div", {"class":"you"})
-    user_rating = ratings[0].text
-    user_rating = float(user_rating[user_rating.find("(")+1:user_rating.find(")")])
-    global_rating = ratings[1].text
-    global_rating = global_rating[global_rating.find("(")+1:global_rating.find(")")]
+    if len(ratings) < 2: 
+        user_rating = None
+        global_rating = None
+    else: 
+        user_rating = ratings[0].text
+        user_rating = user_rating[user_rating.find("(")+1:user_rating.find(")")]
+        global_rating = ratings[1].text
+        global_rating = global_rating[global_rating.find("(")+1:global_rating.find(")")]
+        if user_rating == 'N/A': 
+            user_rating = None
+        else: 
+            user_rating = float(user_rating)
+        if global_rating == 'N/A': 
+            global_rating = None
+        else: 
+            global_rating = float(global_rating)
 
     abv = detail_div.find("p", {"class":"abv"}).text.strip()
-    abv = float(re.findall(r"\d+(?:\.\d+)?", abv)[0]) / 100
+    abv = abv.replace('No', '0')
+    abv = round(float(re.findall(r"\d+(?:\.\d+)?", abv)[0]) / 100, 3)
 
     ibu = detail_div.find("p", {"class":"ibu"}).text.strip()
     ibu = ibu.replace(' IBU', '')
@@ -52,15 +78,15 @@ def scrape_beer(user, beer_div, detail_div):
     check_in_ts = f'{year}-{month}-{day} {time}'
 
     beer_dict = {
-        "user":user,
+        "username":user,
+        "check_in_ts":check_in_ts, 
         "beer":beer, 
         "brewery":brewery, 
-        "style":beer_style, 
+        "beer_style":beer_style, 
         "user_rating":user_rating, 
         "global_rating":global_rating, 
         "abv":abv, 
-        "ibu":ibu, 
-        "check_in_ts":check_in_ts
+        "ibu":ibu
     }
 
     return(beer_dict)
@@ -69,8 +95,6 @@ def main(params):
     load_dotenv(find_dotenv())
 
     verbose = params.verbose
-    user_start = params.user_start
-    user_end = params.user_end
     db = params.db
     db_username = params.db_username
     db_password = params.db_password
@@ -94,16 +118,21 @@ def main(params):
     engine = create_engine(f'postgresql://{db_username}:{db_password}@{host}:{port}/{db}')
     engine.connect()
 
-    username_query = f'select * from {table} limit 10'
+    username_query = f'select * from users order by username limit 10'
     usernames = pd.read_sql(username_query, con = engine)['username']
 
-    output_list = []
-
     for username in usernames:
-        print(username)
+        if verbose:
+            print(f'scraping check ins for {username}')
+        output_list = []
+
         url = f'https://untappd.com/user/{username}/beers'
 
-        source = urllib.request.urlopen(url).read()
+        try: 
+            source = urllib.request.urlopen(url).read()
+        except: 
+            pass
+
         soup = bs.BeautifulSoup(source,'lxml')
 
         beer_divs = soup.find_all("div", {"class": "beer-details"})
@@ -111,30 +140,34 @@ def main(params):
 
         n_check_ins = len(beer_divs)
 
-        if n_check_ins == 0:
-            pass
-
         for i in range(n_check_ins):
             scraped = scrape_beer(username, beer_divs[i], detail_divs[i])
             output_list.append(scraped)
 
-    output_df = pd.DataFrame(output_list)
-    print(output_df.dtypes)
+        try: 
+            output_df = pd.DataFrame(output_list)
+            output_df = output_df.astype(data_types)
+        except: 
+            pass
 
-    # output_df.to_csv('ratings.csv', index = False)
+        for i in range(len(output_df)): 
+            delete_query = f"delete from ratings where username = '{output_df['username'][i]}' and check_in_ts = '{output_df['check_in_ts'][i]}'"
+            engine.execute(delete_query)
+
+        output_df.to_sql(name = table, con = engine, index = False, if_exists = "append")
+
+        time.sleep(3)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'scrape untappd ratings and beer info')
 
     parser.add_argument('--verbose', help = 'verbose output', default = True, type = bool)
-    parser.add_argument('--user_start', help = 'username number to start at', default = 1, type = int)
-    parser.add_argument('--user_end', help = 'username number to end at', default = 100, type = int)
     parser.add_argument('--db', help = 'postgres database name', default = 'null', type = str)
     parser.add_argument('--db_username', help = 'postgres database username', default = 'null', type = str)
     parser.add_argument('--db_password', help = 'postgres database password', default = 'null', type = str)
     parser.add_argument('--host', help = 'postgres db hostname', default = 'null', type = str)
     parser.add_argument('--port', help = 'postgres db port', default = 'null', type = str)
-    parser.add_argument('--table', help = 'postgres table name', default = 'null', type = str)
+    parser.add_argument('--table', help = 'postgres table name', default = 'ratings', type = str)
 
     args = parser.parse_args()
 

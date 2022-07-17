@@ -42,9 +42,9 @@ def main(params):
 
     ssl._create_default_https_context = ssl._create_unverified_context
 
-    usernames = []
-
     if include_first_page: 
+        usernames = []
+
         source = urllib.request.urlopen(base_url)
         soup = bs.BeautifulSoup(source,'lxml')
         user_divs = soup.find_all("h4", {"class": "media-heading"})
@@ -57,11 +57,28 @@ def main(params):
             user = user.strip()
             usernames.append(user)
 
+        delete_query = f'delete from {table} where username in {usernames}'
+        delete_query = delete_query.replace('[', '(')
+        delete_query = delete_query[::-1]
+        delete_query = delete_query.replace(']', ')')
+        delete_query = delete_query[::-1]
+        engine.execute(delete_query)
+
+        output = pd.DataFrame(usernames, columns=['username'])
+        output.to_sql(name = table, con = engine, index = False, if_exists = "append")
+
     for page in range(page_start, page_end): 
         if verbose:
             print(f'scraping page {page}')
+
+        usernames = []
+
         url = base_url + f'?p={page}'
-        source = urllib.request.urlopen(url)
+        try: 
+            source = urllib.request.urlopen(url)
+        except: 
+            return
+
         soup = bs.BeautifulSoup(source,'lxml')
         user_divs = soup.find_all("h4", {"class": "media-heading"})
         for i in range(len(user_divs)): 
@@ -70,17 +87,18 @@ def main(params):
             user = user.split(' ', 1)[0]
             user = user.strip()
             usernames.append(user)
-        time.sleep(1)
-    
-    delete_query = f'delete from {table} where username in {usernames}'
-    delete_query = delete_query.replace('[', '(')
-    delete_query = delete_query[::-1]
-    delete_query = delete_query.replace(']', ')')
-    delete_query = delete_query[::-1]
-    engine.execute(delete_query)
 
-    output = pd.DataFrame(usernames, columns=['username'])
-    output.to_sql(name = table, con = engine, index = False, if_exists = "append")
+        delete_query = f'delete from {table} where username in {usernames}'
+        delete_query = delete_query.replace('[', '(')
+        delete_query = delete_query[::-1]
+        delete_query = delete_query.replace(']', ')')
+        delete_query = delete_query[::-1]
+        engine.execute(delete_query)
+
+        output = pd.DataFrame(usernames, columns=['username'])
+        output.to_sql(name = table, con = engine, index = False, if_exists = "append")
+        
+        time.sleep(1)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'scrape untappd usernames from beerxchange.com')
@@ -94,7 +112,7 @@ if __name__ == '__main__':
     parser.add_argument('--db_password', help = 'postgres database password', default = 'null', type = str)
     parser.add_argument('--host', help = 'postgres db hostname', default = 'null', type = str)
     parser.add_argument('--port', help = 'postgres db port', default = 'null', type = str)
-    parser.add_argument('--table', help = 'postgres table name', default = 'null', type = str)
+    parser.add_argument('--table', help = 'postgres table name', default = 'users', type = str)
 
     args = parser.parse_args()
 
