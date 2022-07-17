@@ -118,7 +118,7 @@ def main(params):
     engine = create_engine(f'postgresql://{db_username}:{db_password}@{host}:{port}/{db}')
     engine.connect()
 
-    username_query = f'select * from users order by username limit 10'
+    username_query = f'select * from users order by username'
     usernames = pd.read_sql(username_query, con = engine)['username']
 
     for username in usernames:
@@ -131,7 +131,7 @@ def main(params):
         try: 
             source = urllib.request.urlopen(url).read()
         except: 
-            pass
+            continue
 
         soup = bs.BeautifulSoup(source,'lxml')
 
@@ -140,15 +140,15 @@ def main(params):
 
         n_check_ins = len(beer_divs)
 
+        if n_check_ins == 0: 
+            continue
+
         for i in range(n_check_ins):
             scraped = scrape_beer(username, beer_divs[i], detail_divs[i])
             output_list.append(scraped)
 
-        try: 
-            output_df = pd.DataFrame(output_list)
-            output_df = output_df.astype(data_types)
-        except: 
-            pass
+        output_df = pd.DataFrame(output_list)
+        output_df = output_df.astype(data_types)
 
         for i in range(len(output_df)): 
             delete_query = f"delete from ratings where username = '{output_df['username'][i]}' and check_in_ts = '{output_df['check_in_ts'][i]}'"
@@ -156,7 +156,7 @@ def main(params):
 
         output_df.to_sql(name = table, con = engine, index = False, if_exists = "append")
 
-        time.sleep(3)
+        time.sleep(1)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'scrape untappd ratings and beer info')
