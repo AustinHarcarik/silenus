@@ -132,7 +132,7 @@ def main(params):
     engine = create_engine(f'postgresql://{db_username}:{db_password}@{host}:{port}/{db}')
     engine.connect()
 
-    username_query = f'select * from beerxchange_users order by username'
+    username_query = f'select * from all_users order by username'
     usernames = pd.read_sql(username_query, con = engine)['username']
 
     for username in usernames:
