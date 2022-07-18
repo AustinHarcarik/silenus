@@ -112,7 +112,7 @@ if __name__ == '__main__':
     parser.add_argument('--db_password', help = 'postgres database password', default = 'null', type = str)
     parser.add_argument('--host', help = 'postgres db hostname', default = 'null', type = str)
     parser.add_argument('--port', help = 'postgres db port', default = 'null', type = str)
-    parser.add_argument('--table', help = 'postgres table name', default = 'users', type = str)
+    parser.add_argument('--table', help = 'postgres table name', default = 'beerxchange_users', type = str)
 
     args = parser.parse_args()
 

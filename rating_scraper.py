@@ -24,9 +24,12 @@ month_map = {
 }
 
 data_types = {
+    "check_in_id":"int",
     "username":"str", 
     "check_in_ts":"datetime64", 
     "beer":"str", 
+    "beer_id":"int", 
+    "beer_url_suffix":"str",
     "brewery":"str", 
     "beer_style":"str", 
     "user_rating":"float", 
@@ -35,9 +38,17 @@ data_types = {
     "ibu":"int"
 }
 
-
 def scrape_beer(user, beer_div, detail_div):
+    check_in_id = detail_div.find_all("p", {"class":"date"})[1].find("a", href = True)["href"][:-1]
+    check_in_id_reversed = check_in_id[::-1]
+    check_in_id = int(check_in_id_reversed.split('/')[0][::-1])
+
     beer = beer_div.find("p", {"class":"name"}).text
+
+    beer_url_suffix = beer_div.find("p", {"class":"name"}).find("a", href = True)["href"]
+
+    beer_url_suffix_reversed = beer_url_suffix[::-1]
+    beer_id = int(beer_url_suffix_reversed.split('/')[0][::-1])
 
     brewery = beer_div.find("p", {"class":"brewery"}).text
 
@@ -78,9 +89,12 @@ def scrape_beer(user, beer_div, detail_div):
     check_in_ts = f'{year}-{month}-{day} {time}'
 
     beer_dict = {
+        "check_in_id":check_in_id,
         "username":user,
         "check_in_ts":check_in_ts, 
         "beer":beer, 
+        "beer_id":beer_id,
+        "beer_url_suffix":beer_url_suffix,
         "brewery":brewery, 
         "beer_style":beer_style, 
         "user_rating":user_rating, 
@@ -118,7 +132,7 @@ def main(params):
     engine = create_engine(f'postgresql://{db_username}:{db_password}@{host}:{port}/{db}')
     engine.connect()
 
-    username_query = f'select * from users order by username'
+    username_query = f'select * from beerxchange_users order by username'
     usernames = pd.read_sql(username_query, con = engine)['username']
 
     for username in usernames:
@@ -150,9 +164,12 @@ def main(params):
         output_df = pd.DataFrame(output_list)
         output_df = output_df.astype(data_types)
 
-        for i in range(len(output_df)): 
-            delete_query = f"delete from ratings where username = '{output_df['username'][i]}' and check_in_ts = '{output_df['check_in_ts'][i]}'"
-            engine.execute(delete_query)
+        t = tuple(list(output_df['check_in_id'].values))
+        if n_check_ins == 1: 
+            delete_query = f"delete from ratings where check_in_id = {output_df['check_in_id'].values[0]}"
+        else: 
+            delete_query = "delete from ratings where check_in_id in {}".format(t)
+        engine.execute(delete_query)
 
         output_df.to_sql(name = table, con = engine, index = False, if_exists = "append")
 
